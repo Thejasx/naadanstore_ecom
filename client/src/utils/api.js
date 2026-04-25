@@ -1,6 +1,17 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const getApiUrl = () => {
+    const envUrl = import.meta.env.VITE_API_URL;
+    if (envUrl) {
+        // Remove trailing slash if present, then ensure it ends with /api
+        const cleanUrl = envUrl.replace(/\/$/, '');
+        return cleanUrl.endsWith('/api') ? cleanUrl : `${cleanUrl}/api`;
+    }
+    // Default for local development
+    return 'http://localhost:5000/api';
+};
+
+const API_URL = getApiUrl();
 
 // Create axios instance
 const api = axios.create({
