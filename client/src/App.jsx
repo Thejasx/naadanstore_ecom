@@ -13,6 +13,8 @@ import AdminLogin from './pages/admin/AdminLogin'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import CategoryManagement from './pages/admin/CategoryManagement'
 import ProductManagement from './pages/admin/ProductManagement'
+import CouponManagement from './pages/admin/CouponManagement'
+import OrderManagement from './pages/admin/OrderManagement'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import MyOrders from './pages/MyOrders'
@@ -30,9 +32,9 @@ const App = () => {
       {(isSellerPath || isAdminPath) ? null : <Navbar />}
       {showUserLogin ? <Login /> : null}
 
-      <Toaster />
+      <Toaster position="top-center" />
 
-      <div className={`${(isSellerPath || isAdminPath) ? "" : " px-6 md:px-16 lg:px-24 xl:px-32"}`}>
+      <div className={`${(isSellerPath || isAdminPath) ? "" : " px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32"}`}>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/products' element={<AllProducts />} />
@@ -44,6 +46,9 @@ const App = () => {
           <Route path='/admin/dashboard' element={<AdminDashboard />} />
           <Route path='/admin/categories' element={<CategoryManagement />} />
           <Route path='/admin/products' element={<ProductManagement />} />
+          <Route path='/admin/coupons' element={<CouponManagement />} />
+          <Route path='/admin/orders' element={<OrderManagement />} />
+
           <Route path='/cart' element={<Cart />} />
           <Route path='/checkout' element={<Checkout />} />
           <Route path='/my-orders' element={<MyOrders />} />
