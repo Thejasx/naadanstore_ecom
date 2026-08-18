@@ -33,7 +33,7 @@ app.use('/api/coupons', couponRoutes);
 app.use('/api/offers', offerRoutes);
 
 // Root route
-app.get('/', (req, res) => {
+app.get(['/', '/api'], (req, res) => {
     res.json({ message: 'Naadan Store API is running...' });
 });
 
