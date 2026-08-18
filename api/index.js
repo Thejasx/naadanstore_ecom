@@ -13,15 +13,27 @@ import offerRoutes from './routes/offerRoutes.js';
 // Load environment variables
 dotenv.config();
 
-// Connect to MongoDB
-connectDB();
-
 const app = express();
 
 // Middleware
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Database connection middleware for serverless/hosted environments
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (error) {
+        console.error('Database connection middleware error:', error.message);
+        res.status(500).json({
+            success: false,
+            message: 'Database connection failed. Please check MONGODB_URI and MongoDB Atlas Network Access settings (whitelist IP 0.0.0.0/0).',
+            error: error.message
+        });
+    }
+});
 
 // Routes
 app.use('/api/categories', categoryRoutes);
